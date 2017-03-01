@@ -19,6 +19,7 @@ var dbDir = envflag.String("DBDIR", defaultDbDir(), "Sqlite3 - Path where the ap
 var user = envflag.String("PGUSER", "root", "postgres - Postgres user name")
 var password = envflag.String("PGPASSWORD", "''", "postgres - Postgres password")
 var host = envflag.String("PGHOST", "127.0.0.1", "postgres - Postgres hostname")
+var port = envflag.Int("PGPORT", 5432, "postgres - Postgres port")
 var db = envflag.String("PGDATABASE", "electrum-label-sync", "postgres - Postgres database name")
 
 var listenPort = envflag.String("LISTENPORT", "0.0.0.0:8080", "Port where the json api should listen at in host:port format.")
@@ -43,6 +44,7 @@ func main() {
 		opts.Password = *password
 		opts.Host = *host
 		opts.Dbname = *db
+                opts.Port = *port
 		sm = newSyncMaster(opts)
 	} else {
 		log.Fatal("Please define which database to use, sqlite3 or postgres")

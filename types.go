@@ -11,6 +11,7 @@ type DbOpts struct {
 	Dbname   string
 	DbType   string
 	Password string
+        Port     int
 }
 
 // SQL Object
