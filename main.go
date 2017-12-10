@@ -10,17 +10,17 @@ import (
 )
 
 const (
-	Version = "0.0.3"
+	Version = "0.0.4"
 )
 
-var dbType = envflag.String("DBTYPE", "sqlite3", "Database to use, valid options sqlite3 or postgres")
+var dbType = envflag.String("DBTYPE", "sqlite3", "Database to use, valid options sqlite3, mysql or postgres")
 var dbDir = envflag.String("DBDIR", defaultDbDir(), "Sqlite3 - Path where the application should look for the database file.")
 
-var user = envflag.String("PGUSER", "root", "postgres - Postgres user name")
-var password = envflag.String("PGPASSWORD", "''", "postgres - Postgres password")
-var host = envflag.String("PGHOST", "127.0.0.1", "postgres - Postgres hostname")
-var port = envflag.Int("PGPORT", 5432, "postgres - Postgres port")
-var db = envflag.String("PGDATABASE", "electrum-label-sync", "postgres - Postgres database name")
+var user = envflag.String("DBUSER", "root", "postgres/mysql - user name")
+var password = envflag.String("DBPASSWORD", "''", "postgres/mysql - password")
+var host = envflag.String("DBHOST", "127.0.0.1", "postgres/mysql - hostname")
+var port = envflag.Int("DBPORT", 5432, "postgres/mysql - port")
+var db = envflag.String("DBDATABASE", "electrum-label-sync", "postgres/mysql - database name")
 
 var listenPort = envflag.String("LISTENPORT", "0.0.0.0:8080", "Port where the json api should listen at in host:port format.")
 
@@ -37,7 +37,7 @@ func main() {
 		opts.DbType = *dbType
 		opts.DbPath = *dbDir
 		sm = newSyncMaster(opts)
-	} else if *dbType == "postgres" {
+	} else if (*dbType == "postgres" || *dbType == "mysql") {
 		var opts DbOpts
 		opts.DbType = *dbType
 		opts.User = *user

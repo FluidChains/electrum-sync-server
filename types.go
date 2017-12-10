@@ -18,7 +18,7 @@ type DbOpts struct {
 type Label struct {
 	Id             int    `sql:"index" json:"id"`
 	ExternalId     string `json:"externalId"`
-	EncryptedLabel string `json:"encryptedLabel"`
+	EncryptedLabel string `sql:"type:text" json:"encryptedLabel"`
 	Nonce          int    `json:"nonce"`
 	WalletId       string `json:"walletId"`
 }

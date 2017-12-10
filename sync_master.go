@@ -6,6 +6,7 @@ import (
 	"github.com/jcelliott/lumber"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+        _ "github.com/jinzhu/gorm/dialects/mysql"
 	_ "github.com/mattn/go-sqlite3"
 	"log"
 	"net/http"
@@ -45,6 +46,14 @@ func newSyncMaster(opts DbOpts) SyncMaster {
 			log.Fatal("Error connecting to Postgres database: ", err)
 		}
 		sync.db = *newdb
+        } else if opts.DbType == "mysql" {
+                optss := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8", opts.User, opts.Password, opts.Host, opts.Port, opts.Dbname)
+                sync.logger.Info("Connecting to mysql database")
+                newdb, err := gorm.Open("mysql", optss)
+                if err != nil {
+                        log.Fatal("Error connecting to mysql database: ", err)
+                }
+                sync.db = *newdb
 	} else {
 		log.Fatal("Unknown database type. Please supply sqlite3 or postgres")
 	}

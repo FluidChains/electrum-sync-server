@@ -1,7 +1,7 @@
 #### Electrum sync server
 This is the server component for the [Bitcoin wallet Electrum](http://electrum.org)'s label synchronization feature.
 
-There is a public node available at http://sync.bytesized-hosting.com/.
+There is a public node available at https://labels.bauerj.eu/.
 
 ##### Installation
 
@@ -15,16 +15,16 @@ This project is 'go get(able)' [install Go](http://golang.org/doc/install) and d
 
 Configuration happens via environment variables.
 
-`DBTYPE`: Database to use, possible values sqlite3 or postgres.
+`DBTYPE`: Database to use, possible values sqlite3, mysql or postgres.
 
 `DBDIR`: Directory to use for sqlite3 database.
 
-`DBUSER`: Postgres user
+`DBUSER`: Postgres/MySQL user
 
-`DBPASSWORD`: Postgres password
+`DBPASSWORD`: Postgres/MySQL password
 
-`PGHOST`: Postgres hostname
+`DBHOST`: Postgres/MySQL hostname
 
-`PGDATABASE`: Postgres database
+`DBDATABASE`: Postgres/MySQL database
 
 `LISTENPORT`: Address to bind on. Format; ip:port
