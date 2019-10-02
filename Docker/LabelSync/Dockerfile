@@ -7,7 +7,7 @@ WORKDIR /go/src/app
 
 CMD ["go-wrapper", "run"]
 
-COPY . /go/src/app
+COPY ./src /go/src/app
 RUN go-wrapper download
 RUN go-wrapper install
 
